@@ -87,6 +87,8 @@ services:
       - database 
     entrypoint: ["/bin/sh", "-c", "mongorestore --uri mongodb://root:secret@database:27017 --dir /dump"]
 
+  version: '3.8'
+services:
   #
   # PROMETHEUS
   #
@@ -95,11 +97,9 @@ services:
     ports:
       - "9090:9090"
     volumes:
-      - prometheus-data:/prometheus
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./docker_compose/prometheus.yml:/etc/prometheus/prometheus.yml
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
-      - '--storage.tsdb.path=/prometheus'
     restart: unless-stopped
 
   #
@@ -129,5 +129,4 @@ networks:
 volumes:
   mongo-data:
     driver: local
-  prometheus-data:
   grafana-data:
