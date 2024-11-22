@@ -51,7 +51,7 @@ jobs:
     
     - name: Set environment variables 
       run: |
-        echo "DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }}" >> $GITHUB_ENV
+        echo "DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }}" > ./docker_compose/.env
 
     - name: Deploy containers
       run: |
