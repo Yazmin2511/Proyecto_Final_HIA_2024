@@ -48,16 +48,7 @@ jobs:
       run: |
         docker build --no-cache -t ${{ secrets.DOCKER_USERNAME }}/backend:latest -f ./docker_compose/backend/Dockerfile ./docker_compose/backend
         docker push ${{ secrets.DOCKER_USERNAME }}/backend:latest
-    
-    - name: Set environment variables 
-      run: |
-        echo "DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }}" > ./docker_compose/.env
 
-    - name: Verificar variables de entorno 
-      run: |
-       echo "DOCKER_USERNAME=${DOCKER_USERNAME}" 
-       docker compose -f ./docker_compose/docker-compose.yml config
-       
     - name: Deploy containers
       run: |
         docker compose -f ./docker_compose/docker-compose.yml down 

@@ -41,7 +41,7 @@ services:
 # BACKEND
 #
   backend:
-    image: ${DOCKER_USERNAME}/backend:latest
+    image: primm/backend:latest
     restart: unless-stopped
     build:
       context: ./backend
@@ -61,7 +61,7 @@ services:
 # frontend
 #
   frontend:
-    image: ${{ secrets.DOCKER_USERNAME }}/frontend:latest
+    image: primm/frontend:latest
     restart: unless-stopped
     build:
       context: ./frontend
