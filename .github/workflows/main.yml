@@ -53,6 +53,11 @@ jobs:
       run: |
         echo "DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }}" > ./docker_compose/.env
 
+    - name: Verificar variables de entorno 
+      run: |
+       echo "DOCKER_USERNAME=${DOCKER_USERNAME}" 
+       docker compose -f ./docker_compose/docker-compose.yml config
+       
     - name: Deploy containers
       run: |
         docker compose -f ./docker_compose/docker-compose.yml down 
