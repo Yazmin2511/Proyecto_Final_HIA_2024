@@ -87,8 +87,6 @@ services:
       - database 
     entrypoint: ["/bin/sh", "-c", "mongorestore --uri mongodb://root:secret@database:27017 --dir /dump"]
 
-  version: '3.8'
-services:
   #
   # PROMETHEUS
   #
