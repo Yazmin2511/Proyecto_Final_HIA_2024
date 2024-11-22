@@ -87,32 +87,35 @@ services:
       - database 
     entrypoint: ["/bin/sh", "-c", "mongorestore --uri mongodb://root:secret@database:27017 --dir /dump"]
 
-# # PROMETHEUS # 
-  prometheus: 
-    image: prom/prometheus 
-    ports: 
-      - "9090:9090" 
-    volumes: 
-      - prometheus-data:/prometheus 
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml 
-    command: 
-      - '--config.file=/etc/prometheus/prometheus.yml' 
-      - '--storage.tsdb.path=/prometheus' 
-    restart: unless-stopped 
+  #
+  # PROMETHEUS
+  #
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - prometheus-data:/prometheus
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+    restart: unless-stopped
 
-# # GRAFANA # 
-  grafana: 
-    image: 
-      grafana/grafana 
-    ports: 
-      - "3000:3000" 
-    environment: 
-      - GF_SECURITY_ADMIN_USER=admin 
-      - GF_SECURITY_ADMIN_PASSWORD=admin 
-    volumes: 
-      - grafana-data:/var/lib/grafana 
-    depends_on: 
-      - prometheus 
+  #
+  # GRAFANA
+  #
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - grafana-data:/var/lib/grafana
+    depends_on:
+      - prometheus
     restart: unless-stopped
 
 
@@ -126,3 +129,5 @@ networks:
 volumes:
   mongo-data:
     driver: local
+  prometheus-data:
+  grafana-data:
